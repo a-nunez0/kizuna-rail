@@ -34,3 +34,227 @@
         padding: 0;
     }
 }
+
+/* Kizuna Rail print improvements */
+@media print {
+    @page {
+        size: letter portrait;
+        margin: 0.35in;
+    }
+
+    header,
+    nav,
+    footer,
+    .confirmation-actions,
+    .btn {
+        display: none !important;
+    }
+
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        font-size: 9pt;
+    }
+
+    .confirmation-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .confirmation-header {
+        margin: 0 0 8px !important;
+        padding: 0 !important;
+    }
+
+    .confirmation-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .confirmation-page section {
+        margin: 0 0 8px !important;
+        padding: 0 !important;
+    }
+
+    .confirmation-page h1 {
+        font-size: 16pt !important;
+    }
+
+    .confirmation-page h2 {
+        font-size: 11pt !important;
+    }
+
+    .confirmation-page .success-icon {
+        display: none !important;
+    }
+
+    .confirmation-page .detail-card,
+    .confirmation-page .passenger-info-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+
+/* Compact single-page confirmation print */
+@media print {
+    @page {
+        size: letter portrait;
+        margin: 0.25in;
+    }
+
+    body {
+        font-size: 8pt !important;
+        line-height: 1.15 !important;
+    }
+
+    .confirmation-page,
+    .confirmation-content,
+    .confirmation-header {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .confirmation-header {
+        margin-bottom: 6px !important;
+    }
+
+    .confirmation-title {
+        font-size: 15pt !important;
+        margin: 0 0 3px !important;
+    }
+
+    .confirmation-message {
+        margin: 2px 0 !important;
+        padding: 0 !important;
+    }
+
+    .booking-reference {
+        margin: 4px auto !important;
+        padding: 5px !important;
+    }
+
+    .confirmation-page section {
+        margin: 5px 0 !important;
+        padding: 0 !important;
+    }
+
+    .confirmation-page h2,
+    .confirmation-page h3 {
+        margin: 3px 0 !important;
+        padding: 0 !important;
+    }
+
+    .details-grid {
+        gap: 4px !important;
+        margin: 4px 0 !important;
+    }
+
+    .detail-card,
+    .passenger-info-card {
+        padding: 4px !important;
+        margin: 2px 0 !important;
+        min-height: 0 !important;
+    }
+
+    .passengers-list,
+    .passenger-details,
+    .steps-list {
+        gap: 3px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .step-item {
+        margin: 2px 0 !important;
+        padding: 0 !important;
+    }
+
+    .step-description,
+    .info-list,
+    .info-list li {
+        margin: 1px 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .confirmation-page * {
+        line-height: 1.15 !important;
+    }
+}
+
+
+/* One-page booking receipt */
+@media print {
+  .confirmation-page .next-steps,
+  .confirmation-page .important-info {
+    display: none !important;
+  }
+  .confirmation-page .passengers-info {
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+}
+
+/* Final single-page print layout fix */
+@media print {
+    .confirmation-page .confirmation-header {
+        gap: 4px !important;
+    }
+
+    .confirmation-page .confirmation-content {
+        gap: 6px !important;
+    }
+
+    .confirmation-page .passengers-list {
+        gap: 4px !important;
+    }
+
+    .confirmation-page .passenger-info-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .confirmation-page .success-icon {
+        display: none !important;
+    }
+
+    .confirmation-page .booking-details,
+    .confirmation-page .passengers-info {
+        break-before: auto !important;
+        page-break-before: auto !important;
+    }
+}
+
+/* Safari print pagination fix */
+@media print {
+    article.confirmation-page,
+    article.confirmation-page .confirmation-header,
+    article.confirmation-page .confirmation-content,
+    article.confirmation-page .passengers-list {
+        display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
+
+    article.confirmation-page .confirmation-header {
+        margin-bottom: 8px !important;
+    }
+
+    article.confirmation-page .booking-details,
+    article.confirmation-page .passengers-info {
+        margin: 6px 0 !important;
+    }
+
+    article.confirmation-page .passenger-info-card {
+        margin-bottom: 4px !important;
+    }
+}

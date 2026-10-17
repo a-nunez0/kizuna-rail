@@ -180,7 +180,7 @@ export const calculateTicketPrice = async (routeId, className) => {
 
     if (!route || !ticketClass) return null;
 
-    return route.distance * ticketClass.pricePerKm;
+    return Number(yenToUsd(route.distance * ticketClass.pricePerKm).toFixed(2));
 };
 
 export const getTicketOptionsForRoute = async (routeId) => {
@@ -208,7 +208,7 @@ export const isRouteOperating = async (routeId) => {
     if (!route) return false;
 
     const currentMonth = new Date().getMonth() + 1;
-    return route.operatingMonths.includes(currentMonth);
+    return route.operatingMonths.includes(monthToShortName(currentMonth));
 };
 
 export const getScheduleWithRoute = async (scheduleId) => {
@@ -238,10 +238,31 @@ export const searchRoutes = async (keyword) => {
 
 export const createConfirmation = async (confirmationData) => {
     const dbObj = db();
+    const schedule = await getScheduleById(confirmationData.scheduleId);
+    if (!schedule) throw new Error("Invalid booking schedule");
+
+    const ticketPrice = await calculateTicketPrice(
+        schedule.routeId,
+        confirmationData.ticketClass
+    );
+    if (ticketPrice === null) throw new Error("Invalid ticket class");
+
+    const passengers = confirmationData.passengers;
+    const passengerCount = Array.isArray(passengers)
+        ? passengers.length
+        : Object.keys(passengers || {}).length;
+
+    if (passengerCount < 1 || passengerCount > 8) {
+        throw new Error("Invalid passenger count");
+    }
+
     const newConfirmation = {
+        ...confirmationData,
         id: generateConfirmationCode(),
         createdAt: new Date().toISOString(),
-        ...confirmationData
+        routeId: schedule.routeId,
+        ticketPrice,
+        totalPrice: Number((ticketPrice * passengerCount).toFixed(2))
     };
     
     // Auto-saves via Proxy

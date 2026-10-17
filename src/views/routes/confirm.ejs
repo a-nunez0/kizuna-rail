@@ -55,6 +55,15 @@
             </div>
         </section>
 
+        <% if (confirmation.ticketPrice != null && confirmation.totalPrice != null) { %>
+        <section class="booking-pricing">
+            <h2 class="section-title">Payment Summary</h2>
+            <p>Price per Ticket: $<%= Number(confirmation.ticketPrice).toFixed(2) %></p>
+            <p>Number of Passengers: <%= confirmation.passengers.length %></p>
+            <p><strong>Total: $<%= Number(confirmation.totalPrice).toFixed(2) %></strong></p>
+        </section>
+        <% } %>
+
         <section class="passengers-info">
             <h2 class="section-title">Passenger Information</h2>
             
